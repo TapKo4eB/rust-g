@@ -34,18 +34,23 @@ jobs:
           command: fmt
           args: -- --check
 
-      - name: Build (release) (default features)
+      - name: Build (release) (ALL features)
         uses: actions-rs/cargo@v1
         with:
           toolchain: stable
           command: build
-          args: --target i686-pc-windows-msvc --release
+          args: --target i686-pc-windows-msvc --release --all-features
 
       - uses: actions/upload-artifact@v1
         with:
           name: rust_g.dll
           path: target/i686-pc-windows-msvc/release/rust_g.dll
 
+      - uses: actions/upload-artifact@v1
+        with:
+          name: rust_g.dll
+          path: target/rust_g.dm
+  
   build-linux:
     runs-on: ubuntu-latest
     env:
@@ -92,12 +97,12 @@ jobs:
         env:
           BYOND_BIN: /home/runner/BYOND/byond/bin
 
-      - name: Build (release) (default features)
+      - name: Build (release) (ALL features)
         uses: actions-rs/cargo@v1
         with:
           toolchain: stable
           command: build
-          args: --target i686-unknown-linux-gnu --release
+          args: --target i686-unknown-linux-gnu --release --all-features
 
       - uses: actions/upload-artifact@v1
         with:
